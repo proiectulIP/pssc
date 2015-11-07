@@ -31,7 +31,7 @@ namespace pssc
 
         private string mapButtonToType(int btn)
         {
-            string fret = "aaa";
+            string fret = null;
             switch (btn)
             {
                 case 1: { fret = "profesor"; break; }

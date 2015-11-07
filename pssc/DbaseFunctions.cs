@@ -17,8 +17,7 @@ namespace pssc
 
         public DbaseFunctions(string dbasePath,string browseType)
         {
-            connectionString = @"Provider=Microsoft.Jet.OLEDB.4.0;" +
-        @"Data source= "+ dbasePath;
+            connectionString = @"Provider=Microsoft.Jet.OLEDB.4.0;" +@"Data source= "+ dbasePath;
             userType = browseType;
 
             connection.ConnectionString = connectionString;
