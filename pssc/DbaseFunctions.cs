@@ -15,9 +15,9 @@ namespace pssc
         private string userType;
         private OleDbConnection connection = new OleDbConnection();
 
-        public DbaseFunctions(string dbasePath,string browseType)
+        public DbaseFunctions(string dbasePath, string browseType)
         {
-            connectionString = @"Provider=Microsoft.Jet.OLEDB.4.0;" +@"Data source= "+ dbasePath;
+            connectionString = @"Provider=Microsoft.Jet.OLEDB.4.0;" + @"Data source= " + dbasePath;
             userType = browseType;
 
             connection.ConnectionString = connectionString;
@@ -30,30 +30,39 @@ namespace pssc
                 connection.Open();
             }
 
-            catch(OleDbException ex)
+            catch (OleDbException ex)
             {
                 MessageBox.Show(ex.Message);
             }
         }
 
-        public void checkLoginCredintials(string user, string pass)
+        public void checkLoginCredintials(string user, string pass, string userType)
         {
             OleDbCommand command = new OleDbCommand("select * from users", connection);
             OleDbDataReader reader;
-            reader = command.ExecuteReader();
-
-            while(reader.Read())
+            try
             {
-                string username = reader["username"].ToString();
-                string password = reader["pass"].ToString() ;
+                reader = command.ExecuteReader();
 
-                if((user.Equals(username)) && (pass.Equals(password)))
+                while (reader.Read())
+                {
+                    string username = reader["username"].ToString();
+                    string password = reader["pass"].ToString();
+                    string loginType = reader["userType"].ToString();
+
+                    if ((user.Equals(username)) && (pass.Equals(password)) && (userType.Equals(loginType)))
                     {
-                    MessageBox.Show("success");
-                    break;
+                        MessageBox.Show("success");
+                        break;
+                    }
                 }
 
             }
+            catch (OleDbException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
         }
     }
 }

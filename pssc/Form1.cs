@@ -30,7 +30,7 @@ namespace pssc
             loginUser = radioButtonChecked();
             db.dbaseConnect();
 
-            db.checkLoginCredintials(textBox1.Text, textBox2.Text);
+            db.checkLoginCredintials(textBox1.Text, textBox2.Text,radioButtonChecked());
 
         }
     }
